@@ -193,8 +193,8 @@ public class FichaInterno extends javax.swing.JPanel {
         jLabel20 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         padre_vive = new javax.swing.JCheckBox();
-        estudios = new javax.swing.JComboBox<>();
-        estado_civil = new javax.swing.JComboBox<>();
+        estudios = new javax.swing.JComboBox<String>();
+        estado_civil = new javax.swing.JComboBox<String>();
         dni = new javax.swing.JTextField();
         tel1 = new javax.swing.JTextField();
         apellido = new javax.swing.JTextField();
@@ -207,7 +207,7 @@ public class FichaInterno extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         nombre = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        sexo = new javax.swing.JComboBox<>();
+        sexo = new javax.swing.JComboBox<String>();
         jLabel25 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         dom_leg = new javax.swing.JTextField();
@@ -275,9 +275,9 @@ public class FichaInterno extends javax.swing.JPanel {
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
-        boxCelda = new javax.swing.JComboBox<>();
-        boxUnidad = new javax.swing.JComboBox<>();
-        boxPabellon = new javax.swing.JComboBox<>();
+        boxCelda = new javax.swing.JComboBox<String>();
+        boxUnidad = new javax.swing.JComboBox<String>();
+        boxPabellon = new javax.swing.JComboBox<String>();
         modificarAlbergue = new javax.swing.JButton();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
@@ -294,11 +294,9 @@ public class FichaInterno extends javax.swing.JPanel {
         asignarCelda = new javax.swing.JButton();
         guardarCambios1raVez = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1300, 651));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setLayout(null);
 
         panel_FichaInterno.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -306,98 +304,116 @@ public class FichaInterno extends javax.swing.JPanel {
 
         lblfoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         jPanel1.add(lblfoto);
-        lblfoto.setBounds(755, 11, 210, 220);
+        lblfoto.setBounds(755, 11, 200, 220);
 
+        jLabel6.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel6.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("* Apellidos:");
         jPanel1.add(jLabel6);
         jLabel6.setBounds(27, 11, 81, 20);
 
+        jLabel7.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("* Nombres:");
         jPanel1.add(jLabel7);
         jLabel7.setBounds(392, 11, 86, 20);
 
+        jLabel8.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Apodo:");
         jPanel1.add(jLabel8);
         jLabel8.setBounds(26, 39, 82, 20);
 
+        jLabel10.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Madre:");
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(21, 345, 88, 14);
+        jLabel10.setBounds(21, 345, 88, 15);
 
+        jLabel11.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("* Nacionalidad:");
         jPanel1.add(jLabel11);
-        jLabel11.setBounds(20, 125, 88, 14);
+        jLabel11.setBounds(20, 125, 88, 15);
 
+        jLabel12.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel12.setText("* Fecha Nacimiento:");
         jPanel1.add(jLabel12);
         jLabel12.setBounds(8, 157, 100, 20);
 
+        jLabel13.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel13.setText("* Lugar Nacimiento:");
         jPanel1.add(jLabel13);
         jLabel13.setBounds(378, 135, 100, 20);
 
+        jLabel14.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel14.setText(" * Domicilio Legal:");
         jPanel1.add(jLabel14);
         jLabel14.setBounds(20, 197, 88, 20);
 
+        jLabel15.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText("Domicilio Actual:");
         jPanel1.add(jLabel15);
         jLabel15.setBounds(20, 229, 88, 20);
 
+        tell2.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         tell2.setText("Telefono 2:");
         jPanel1.add(tell2);
         tell2.setBounds(419, 374, 55, 20);
 
+        jLabel18.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel18.setText("Ocupación:");
         jPanel1.add(jLabel18);
         jLabel18.setBounds(20, 311, 88, 20);
 
+        jLabel19.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel19.setText("Estudios:");
         jPanel1.add(jLabel19);
-        jLabel19.setBounds(20, 285, 88, 14);
+        jLabel19.setBounds(20, 285, 88, 15);
 
+        jLabel20.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel20.setText("Estado Civil:");
         jPanel1.add(jLabel20);
         jLabel20.setBounds(392, 103, 86, 20);
 
+        jLabel23.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel23.setText("Rasgos:");
         jPanel1.add(jLabel23);
-        jLabel23.setBounds(20, 420, 88, 14);
+        jLabel23.setBounds(20, 420, 88, 15);
 
+        padre_vive.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         padre_vive.setText("Vive");
         jPanel1.add(padre_vive);
         padre_vive.setBounds(343, 373, 45, 23);
 
-        estudios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Primario Incompleto", "Primario Completo", "Secundario Incompleto", "Secundario Completo", "Terciario Incompleto", "Terciario Completo", "Universitario Incompleto", "Universitario Completo", " " }));
+        estudios.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
+        estudios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primario Incompleto", "Primario Completo", "Secundario Incompleto", "Secundario Completo", "Terciario Incompleto", "Terciario Completo", "Universitario Incompleto", "Universitario Completo", " " }));
         estudios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 estudiosActionPerformed(evt);
             }
         });
         jPanel1.add(estudios);
-        estudios.setBounds(118, 282, 267, 20);
+        estudios.setBounds(118, 282, 267, 21);
 
-        estado_civil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Soltero", "Casado", "Divorciado", "Viudo", " " }));
+        estado_civil.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
+        estado_civil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Soltero", "Casado", "Divorciado", "Viudo", " " }));
         estado_civil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 estado_civilActionPerformed(evt);
             }
         });
         jPanel1.add(estado_civil);
-        estado_civil.setBounds(488, 103, 220, 20);
+        estado_civil.setBounds(488, 103, 220, 21);
         jPanel1.add(dni);
         dni.setBounds(118, 93, 200, 20);
         jPanel1.add(tel1);
@@ -422,15 +438,18 @@ public class FichaInterno extends javax.swing.JPanel {
         nombre.setBounds(488, 11, 220, 20);
         nombre.getAccessibleContext().setAccessibleName("");
 
+        jLabel24.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel24.setText("* DNI:");
         jPanel1.add(jLabel24);
         jLabel24.setBounds(20, 93, 88, 20);
 
-        sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
+        sexo.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
+        sexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Femenino" }));
         jPanel1.add(sexo);
-        sexo.setBounds(488, 39, 220, 20);
+        sexo.setBounds(488, 39, 220, 21);
 
+        jLabel25.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel25.setText("* Sexo:");
         jPanel1.add(jLabel25);
@@ -442,6 +461,7 @@ public class FichaInterno extends javax.swing.JPanel {
         jPanel1.add(madre);
         madre.setBounds(119, 342, 222, 20);
 
+        jLabel26.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel26.setText("Edad Actual:");
         jPanel1.add(jLabel26);
@@ -465,14 +485,17 @@ public class FichaInterno extends javax.swing.JPanel {
         jPanel1.add(modificarDatos);
         modificarDatos.setBounds(780, 450, 160, 23);
 
+        jLabel21.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel21.setText("00");
         jPanel1.add(jLabel21);
         jLabel21.setBounds(488, 167, 220, 20);
 
+        lee.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         lee.setText("Sabe Leer");
         jPanel1.add(lee);
-        lee.setBounds(453, 284, 73, 23);
+        lee.setBounds(453, 284, 75, 23);
 
+        escribe.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         escribe.setText("Sabe Escribir");
         jPanel1.add(escribe);
         escribe.setBounds(558, 284, 110, 23);
@@ -500,11 +523,13 @@ public class FichaInterno extends javax.swing.JPanel {
         jPanel1.add(padre);
         padre.setBounds(118, 374, 223, 20);
 
+        jLabel22.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel22.setText("Padre:");
         jPanel1.add(jLabel22);
-        jLabel22.setBounds(20, 377, 88, 14);
+        jLabel22.setBounds(20, 377, 88, 15);
 
+        madre_vive.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         madre_vive.setText("Vive");
         jPanel1.add(madre_vive);
         madre_vive.setBounds(343, 341, 45, 23);
@@ -516,9 +541,10 @@ public class FichaInterno extends javax.swing.JPanel {
         jPanel1.add(jScrollPane2);
         jScrollPane2.setBounds(120, 420, 580, 65);
 
+        jLabel28.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel28.setText("Telefono 1:");
         jPanel1.add(jLabel28);
-        jLabel28.setBounds(420, 345, 55, 14);
+        jLabel28.setBounds(420, 345, 53, 15);
         jPanel1.add(tel2);
         tel2.setBounds(495, 374, 222, 20);
         jPanel1.add(jSeparator6);
@@ -533,9 +559,10 @@ public class FichaInterno extends javax.swing.JPanel {
         jPanel1.add(Cancelar2);
         Cancelar2.setBounds(780, 390, 160, 23);
 
+        jLabel37.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 11)); // NOI18N
         jLabel37.setText("(*) Campos Obligatorios");
         jPanel1.add(jLabel37);
-        jLabel37.setBounds(30, 524, 115, 14);
+        jLabel37.setBounds(30, 524, 121, 15);
 
         nuevoIngreso.setText("Nuevo Ingreso");
         nuevoIngreso.addActionListener(new java.awt.event.ActionListener() {
@@ -769,7 +796,7 @@ public class FichaInterno extends javax.swing.JPanel {
                 .addComponent(jLabel36)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(2868, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -778,7 +805,7 @@ public class FichaInterno extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel36))
-                .addContainerGap(1775, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panel_FichaInterno.addTab("Observaciones                  ", jPanel4);
@@ -797,10 +824,10 @@ public class FichaInterno extends javax.swing.JPanel {
             }
         });
 
-        boxCelda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        boxCelda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
         boxCelda.setEnabled(false);
 
-        boxUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "N° 1 -- Penados Mayores", "N° 2 -- Procesados Mayores", "N° 3 -- Jóvenes Adultos", "N° 4 -- Mujeres", "N° 5 -- Alternativa" }));
+        boxUnidad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "N° 1 -- Penados Mayores", "N° 2 -- Procesados Mayores", "N° 3 -- Jóvenes Adultos", "N° 4 -- Mujeres", "N° 5 -- Alternativa" }));
         boxUnidad.setEnabled(false);
         boxUnidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -808,7 +835,7 @@ public class FichaInterno extends javax.swing.JPanel {
             }
         });
 
-        boxPabellon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "n" }));
+        boxPabellon.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "n" }));
         boxPabellon.setEnabled(false);
 
         modificarAlbergue.setText("Modificar");
@@ -930,7 +957,7 @@ public class FichaInterno extends javax.swing.JPanel {
                                         .addComponent(jSeparator9, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
                                         .addComponent(jSeparator10)
                                         .addComponent(jSeparator11)))))))
-                .addContainerGap(2899, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -991,7 +1018,8 @@ public class FichaInterno extends javax.swing.JPanel {
 
         panel_FichaInterno.addTab("Albergue                                ", jPanel5);
 
-        add(panel_FichaInterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 5, -1, -1));
+        add(panel_FichaInterno);
+        panel_FichaInterno.setBounds(0, 0, 980, 600);
         panel_FichaInterno.getAccessibleContext().setAccessibleName("Datos");
         panel_FichaInterno.getAccessibleContext().setAccessibleDescription("");
 
@@ -1006,13 +1034,8 @@ public class FichaInterno extends javax.swing.JPanel {
             .addGap(0, 28, Short.MAX_VALUE)
         );
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1369, 287, -1, -1));
-
-        jLabel1.setText("Interno: ");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(643, 603, -1, -1));
-
-        jLabel2.setText("Estado:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(691, 603, -1, -1));
+        add(jPanel2);
+        jPanel2.setBounds(1369, 287, 0, 28);
     }// </editor-fold>//GEN-END:initComponents
 
     private void guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCambiosActionPerformed
@@ -1437,7 +1460,6 @@ public class FichaInterno extends javax.swing.JPanel {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1448,7 +1470,6 @@ public class FichaInterno extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;

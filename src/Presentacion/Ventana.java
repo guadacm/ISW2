@@ -63,7 +63,7 @@ public class Ventana extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.BorderLayout(10, 10));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(80, 10, 10, 0));
         jPanel1.setMinimumSize(new java.awt.Dimension(200, 212));
@@ -89,6 +89,11 @@ public class Ventana extends javax.swing.JFrame {
         jPanel1.add(jButton2);
 
         jButton3.setText("Listar por Unidad");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3);
 
         jButton4.setText("Registrar Egreso");
@@ -101,6 +106,11 @@ public class Ventana extends javax.swing.JFrame {
         jPanel1.add(jButton6);
 
         jButton7.setText("About");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton7);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_START);
@@ -123,7 +133,6 @@ public class Ventana extends javax.swing.JFrame {
         getContentPane().add(jPanel4, java.awt.BorderLayout.PAGE_START);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
         getContentPane().add(jPanel5, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -146,6 +155,14 @@ public class Ventana extends javax.swing.JFrame {
         jPanel5.revalidate();
         jPanel5.repaint();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments

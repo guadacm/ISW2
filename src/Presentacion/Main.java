@@ -10,7 +10,8 @@ public class Main {
         //System.out.println("Conectado: "+conexion.crearConexion());
         //if(conexion.crearConexion()){
         if(Management.crearConexion()){    
-            Ventana v = new Ventana();
+            //Ventana v = new Ventana();
+            NuevoDiseño v = new NuevoDiseño();
             v.setVisible(true);
         }
     }
