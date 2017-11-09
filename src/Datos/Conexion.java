@@ -28,7 +28,7 @@ public class Conexion {
     {
        try {
           Class.forName("org.postgresql.Driver");
-          conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Penal","postgres","12345");
+          conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Penal","postgres","carmen26");
           if(conexion!=null){
               System.out.println("conexion exitosa");
               return true;

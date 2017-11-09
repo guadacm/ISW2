@@ -51,12 +51,9 @@ public class NuevoDiseño extends javax.swing.JFrame {
         PanelOpciones.setBackground(new java.awt.Color(0, 51, 102));
         PanelOpciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         PanelOpciones.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 240, 20));
-
-        jLabel15.setIcon(new javax.swing.ImageIcon("C:\\Users\\Luis Montenegro\\Desktop\\Escudo_de_1San_Luis_ARG.png")); // NOI18N
         PanelOpciones.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, -1, -1));
 
         about.setBackground(new java.awt.Color(0, 51, 153));
-        about.setIcon(new javax.swing.ImageIcon("C:\\Users\\Luis Montenegro\\Desktop\\imagenes para botones\\about.png")); // NOI18N
         about.setText("jButton1");
         about.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,7 +113,7 @@ public class NuevoDiseño extends javax.swing.JFrame {
         PanelOpciones.add(listarUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 300, 60));
 
         PanelPrincipal.add(PanelOpciones);
-        PanelOpciones.setBounds(0, 0, 290, 801);
+        PanelOpciones.setBounds(0, 0, 300, 801);
 
         TituloCentral.setBackground(new java.awt.Color(102, 153, 255));
 

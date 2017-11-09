@@ -6,6 +6,8 @@ import Logica.Registro;
 import java.awt.Component;
 import java.awt.HeadlessException;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -33,15 +35,13 @@ public class FichaInterno extends javax.swing.JPanel {
     int longitudBytes;
     private String nroInterno;
     private String stringDni;
-    
-    
-    
+
     public FichaInterno() { //modificar
         initComponents();
-        
+
     }
-    
-        public FichaInterno(int dni){ //alta
+
+    public FichaInterno(int dni) { //alta
         initComponents();
         this.dni.setText(Integer.toString(dni));
         Guardar1.setEnabled(true);
@@ -54,12 +54,17 @@ public class FichaInterno extends javax.swing.JPanel {
         modificarAlbergue.setVisible(false);
         guardarCambios.setVisible(false);
         this.dni.setEditable(false);
+        SoloLetras(apellido);
+        SoloLetras(apodo);
+        SoloLetras(nacionalidad);
+        SoloLetras(madre);
+        SoloLetras(padre);
+        SoloLetras(nombre);
     }
-    
-    
+
     public FichaInterno(String a) { //visualizar
         //String nroInterno="";
-        stringDni=a;
+        stringDni = a;
         initComponents();
         String sql, sql2, albergue[] = new String[3];
         InputStream is;
@@ -68,17 +73,17 @@ public class FichaInterno extends javax.swing.JPanel {
         guardarCambios1raVez.setVisible(false);
         modificarAlbergue.setVisible(true);
         guardarCambios.setVisible(true);
-        
-        sql = " select * from \"Interno\" where dni ="+a;
-        
+
+        sql = " select * from \"Interno\" where dni =" + a;
+
         jTextEditable(false);
-               
+
         //recuperacion de datos personales
-        try{
+        try {
             ResultSet rs = Management.conexion.ejecutarSQLSelect(sql);
             //ResultSet rs = con.ejecutarSQLSelect(sql);
-            while(rs.next()){ 
-                nroInterno=(rs.getString(1));
+            while (rs.next()) {
+                nroInterno = (rs.getString(1));
                 apellido.setText(rs.getString(2));
                 nombre.setText(rs.getString(3));
                 dni.setText(rs.getString(4));
@@ -86,8 +91,16 @@ public class FichaInterno extends javax.swing.JPanel {
                 apodo.setText(rs.getString(6));
                 padre.setText(rs.getString(7));
                 madre.setText(rs.getString(8));
-                if("t".equals(rs.getString(9)))padre_vive.setSelected(true); else padre_vive.setSelected(false);
-                if("t".equals(rs.getString(10)))madre_vive.setSelected(true); else madre_vive.setSelected(false);                
+                if ("t".equals(rs.getString(9))) {
+                    padre_vive.setSelected(true);
+                } else {
+                    padre_vive.setSelected(false);
+                }
+                if ("t".equals(rs.getString(10))) {
+                    madre_vive.setSelected(true);
+                } else {
+                    madre_vive.setSelected(false);
+                }
                 fec_nac.setText(rs.getString(11));
                 lug_nac.setText(rs.getString(12));
                 dom_leg.setText(rs.getString(13));
@@ -96,46 +109,57 @@ public class FichaInterno extends javax.swing.JPanel {
                 tel2.setText(rs.getString(16));
                 ocupacion.setText(rs.getString(17));
                 //sexo.removeAllItems();
-                
-                if("t".equals(rs.getString(26))) sexo.setSelectedItem("Femenino");
-                if("f".equals(rs.getString(26))) sexo.setSelectedItem("Masculino");                
+
+                if ("t".equals(rs.getString(26))) {
+                    sexo.setSelectedItem("Femenino");
+                }
+                if ("f".equals(rs.getString(26))) {
+                    sexo.setSelectedItem("Masculino");
+                }
                 //estudios.removeAllItems();
                 estudios.setSelectedItem(rs.getString(18));
                 //estado_civil.removeAllItems();
                 estado_civil.setSelectedItem(rs.getString(19));
-                if("t".equals(rs.getString(20)))lee.setSelected(true); else lee.setSelected(false);
-                if("t".equals(rs.getString(21)))escribe.setSelected(true);else escribe.setSelected(false);
+                if ("t".equals(rs.getString(20))) {
+                    lee.setSelected(true);
+                } else {
+                    lee.setSelected(false);
+                }
+                if ("t".equals(rs.getString(21))) {
+                    escribe.setSelected(true);
+                } else {
+                    escribe.setSelected(false);
+                }
                 rasgos.setText(rs.getString(22));
-                                
-                
-                is = rs.getBinaryStream(23);               
+
+                is = rs.getBinaryStream(23);
                 BufferedImage bi = ImageIO.read(is);
-                foto = new ImageIcon(bi);                
+                foto = new ImageIcon(bi);
                 Image img = foto.getImage();
                 Image newimg = img.getScaledInstance(210, 220, java.awt.Image.SCALE_SMOOTH);
-                ImageIcon newicon = new ImageIcon(newimg);                
+                ImageIcon newicon = new ImageIcon(newimg);
                 lblfoto.setIcon(newicon);
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             //JOptionPane.showMessageDialog(rootPane,"exception: "+ex);
         }
-        
+
         //recuperacion de datos de albergue
-        try{
-            sql2 = "select * from \"Albergue\" where \"nInterno\"="+nroInterno;
+        try {
+            sql2 = "select * from \"Albergue\" where \"nInterno\"=" + nroInterno;
             //ResultSet rs = Management.consultarCelda(nroInterno);
             ResultSet rs1 = Management.conexion.ejecutarSQLSelect(sql2);
-            while(rs1.next()){ 
+            while (rs1.next()) {
                 labelUnidad.setText(rs1.getString(2));       //unidad
                 labelPabellon.setText(rs1.getString(3));     //pabellon
                 labelCelda.setText(rs1.getString(4));        //celda
             }
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(rootPane,"exception: "+ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "exception: " + ex);
         }
     }
-    
-        public void jTextEditable(boolean m){
+
+    public void jTextEditable(boolean m) {
         Cancelar2.setVisible(m);
         Guardar1.setVisible(m);
         Actualizar1.setVisible(m);
@@ -154,7 +178,7 @@ public class FichaInterno extends javax.swing.JPanel {
         dom_act.setEditable(m);
         tel1.setEditable(m);
         tel2.setEditable(m);
-        ocupacion.setEditable(m);        
+        ocupacion.setEditable(m);
         rasgos.setEditable(m);
         sexo.setEnabled(m);
         estudios.setEnabled(m);
@@ -163,8 +187,31 @@ public class FichaInterno extends javax.swing.JPanel {
         escribe.setEnabled(m);
         padre_vive.setEnabled(m);
         madre_vive.setEnabled(m);
-}
-
+    }
+    
+    public void SoloLetras(javax.swing.JTextField a){
+        a.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e){
+                char c=e.getKeyChar();
+                if(Character.isDigit(c)){
+                    getToolkit().beep();
+                    e.consume();
+                }
+            }
+        });
+    }
+    
+    public void SoloNumeros(javax.swing.JTextField a){
+        a.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e){
+                char c=e.getKeyChar();
+                if(Character.isLetter(c)){
+                    getToolkit().beep();
+                    e.consume();
+                }
+            }
+        });
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1040,49 +1087,53 @@ public class FichaInterno extends javax.swing.JPanel {
 
     private void guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCambiosActionPerformed
         String nuevaUnidad, nuevoPabellon, nuevaCelda, sql;
-        nuevaUnidad=(String) boxUnidad.getSelectedItem();
+        nuevaUnidad = (String) boxUnidad.getSelectedItem();
         nuevoPabellon = (String) boxPabellon.getSelectedItem();
-        nuevaCelda=(String) boxCelda.getSelectedItem();
-        try{
-            sql = "update \"Albergue\" set unidad='"+nuevaUnidad+"',pabellon='"+nuevoPabellon
-                 +"', celda='"+nuevaCelda+"' where \"nInterno\"="+nroInterno;
+        nuevaCelda = (String) boxCelda.getSelectedItem();
+        try {
+            sql = "update \"Albergue\" set unidad='" + nuevaUnidad + "',pabellon='" + nuevoPabellon
+                    + "', celda='" + nuevaCelda + "' where \"nInterno\"=" + nroInterno;
             //ResultSet rs = Management.consultarCelda(nroInterno);
             //ResultSet rs = Management.conexion.ejecutarSQLSelect(sql);
             boolean rs = Management.conexion.ejecutarSQL(sql);
-            
-            if (rs==false) avisoAlbergue.setText("Asignacion de celda Exitosa");
-            else if(rs==true) avisoAlbergue.setText("Opps, algo no va bien");
+
+            if (rs == false) {
+                avisoAlbergue.setText("Asignacion de celda Exitosa");
+            } else if (rs == true) {
+                avisoAlbergue.setText("Opps, algo no va bien");
+            }
             /*while(rs1.next()){ 
                 labelUnidad.setText(rs1.getString(2));       //unidad
                 labelPabellon.setText(rs1.getString(3));     //pabellon
                 labelCelda.setText(rs1.getString(4));        //celda
             }*/
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(rootPane,"exception: "+ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "exception: " + ex);
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_guardarCambiosActionPerformed
 
     private void Guardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Guardar1ActionPerformed
         Interno nuevo = new Interno();
         SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
-        
+
         nuevo.setApellido(apellido.getText());
         nuevo.setNombre(nombre.getText());
         nuevo.setApodo(apodo.getText());
-        if("Masculino".equals((String)sexo.getSelectedItem())){
+        if ("Masculino".equals((String) sexo.getSelectedItem())) {
             nuevo.setSexo(false);
-        }else {nuevo.setSexo(true);}
+        } else {
+            nuevo.setSexo(true);
+        }
         nuevo.setDni(Integer.parseInt(dni.getText()));
-        nuevo.setEstado_civil((String)estado_civil.getSelectedItem());
+        nuevo.setEstado_civil((String) estado_civil.getSelectedItem());
         nuevo.setNacionalidad(nacionalidad.getText());
         nuevo.setLugar_nac(lug_nac.getText());
         nuevo.setFecha_nac(fec_nac.getText());
         nuevo.setDom_legal(dom_leg.getText());
         nuevo.setDom_actual(dom_act.getText());
-        nuevo.setEstudios((String)estudios.getSelectedItem());
+        nuevo.setEstudios((String) estudios.getSelectedItem());
         nuevo.setLee(lee.isSelected());
         nuevo.setEscribe(escribe.isSelected());
         nuevo.setOcupacion(ocupacion.getText());
@@ -1093,9 +1144,9 @@ public class FichaInterno extends javax.swing.JPanel {
         nuevo.setTel1(tel1.getText());
         nuevo.setTel2(tel2.getText());
         nuevo.setRasgos(rasgos.getText());
-        
+
         Boolean b = Management.altaInterno(nuevo);
-        if(b==true){            
+        if (b == true) {
             System.out.println("\nAlta exitosa");
             cargarFoto.setEnabled(true);
             Guardar1.setVisible(false);
@@ -1121,128 +1172,128 @@ public class FichaInterno extends javax.swing.JPanel {
             tel1.setEnabled(false);
             tel2.setEnabled(false);
             rasgos.setEnabled(false);
-            JOptionPane.showMessageDialog(rootPane,"Ingresado correctamente!");
+            JOptionPane.showMessageDialog(rootPane, "Ingresado correctamente!");
         }
     }//GEN-LAST:event_Guardar1ActionPerformed
 
     private void boxUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxUnidadActionPerformed
         String opcion = boxUnidad.getSelectedItem().toString();
-    if ("N° 1 -- Penados Mayores".equals(opcion)){
-        boxPabellon.removeAllItems();
-        boxPabellon.addItem("a");
-        boxPabellon.addItem("b");
-        boxPabellon.addItem("c");
-        boxPabellon.addItem("d");
-        boxPabellon.addItem("e");
-        boxPabellon.addItem("f");
-        boxPabellon.addItem("g");
-        boxPabellon.addItem("h");
-        boxPabellon.addItem("i");
-        boxPabellon.addItem("j");
-        boxPabellon.addItem("n");
-        boxCelda.removeAllItems();
-        boxCelda.addItem("1");
-        boxCelda.addItem("2");
-        boxCelda.addItem("3");
-        boxCelda.addItem("4");
-        boxCelda.addItem("5");
-        boxCelda.addItem("6");
-        boxCelda.addItem("7");
-        boxCelda.addItem("8");
-        boxCelda.addItem("9");
-        boxCelda.addItem("10");
-        boxCelda.addItem("11");
-        boxCelda.addItem("12");
-    }
-        
-    if ("N° 2 -- Procesados Mayores".equals(opcion)){
-        boxPabellon.removeAllItems();
-        boxPabellon.addItem("a");
-        boxPabellon.addItem("b");
-        boxPabellon.addItem("c");
-        boxPabellon.addItem("d");
-        boxPabellon.addItem("e");
-        boxPabellon.addItem("f");
-        boxPabellon.addItem("g");
-        boxPabellon.addItem("h");
-        boxPabellon.addItem("i");
-        boxPabellon.addItem("j");
-        boxPabellon.addItem("k");
-        boxCelda.removeAllItems();
-        boxCelda.addItem("1");
-        boxCelda.addItem("2");
-        boxCelda.addItem("3");
-        boxCelda.addItem("4");
-        boxCelda.addItem("5");
-        boxCelda.addItem("6");
-        boxCelda.addItem("7");
-        boxCelda.addItem("8");
-        boxCelda.addItem("9");
-        boxCelda.addItem("10");
-        boxCelda.addItem("11");
-        boxCelda.addItem("12");
-        
-    }
-        
-    if ("N° 3 -- Jóvenes Adultos".equals(opcion)){
-        boxPabellon.removeAllItems();
-        boxPabellon.addItem("a");
-        boxPabellon.addItem("b");
-        boxPabellon.addItem("c");
-        boxPabellon.addItem("d");
-        boxPabellon.addItem("refugiados");
-        boxCelda.removeAllItems();
-        boxCelda.addItem("1");
-        boxCelda.addItem("2");
-        boxCelda.addItem("3");
-        boxCelda.addItem("4");
-        boxCelda.addItem("5");
-        boxCelda.addItem("6");
-        boxCelda.addItem("7");
-        boxCelda.addItem("8");
-        boxCelda.addItem("9");
-        boxCelda.addItem("10");
-        boxCelda.addItem("11");
-        boxCelda.addItem("12");
-        
-    }
-    if ("N° 4 -- Mujeres".equals(opcion)){
-        boxPabellon.removeAllItems();
-        boxPabellon.addItem("Procesadas");
-        boxPabellon.addItem("Penadas");
-        boxPabellon.addItem("Aislamiento");
-        boxPabellon.addItem("Madres");
-        boxCelda.removeAllItems();
-        boxCelda.addItem("1");
-        boxCelda.addItem("2");
-        boxCelda.addItem("3");
-        boxCelda.addItem("4");
-        boxCelda.addItem("5");
-        boxCelda.addItem("6");
-        boxCelda.addItem("7");
-        boxCelda.addItem("8");
-        boxCelda.addItem("9");
-        boxCelda.addItem("10");
-        boxCelda.addItem("11");
-        boxCelda.addItem("12");
-        
-    }
-    if ("N° 5 -- Alternativa".equals(opcion)){
-        boxPabellon.removeAllItems();
-        boxPabellon.addItem("Policiales");
-        boxPabellon.addItem("Militares");
-        boxPabellon.addItem("Politicos");
-        boxCelda.removeAllItems();
-        boxCelda.addItem("1");
-        boxCelda.addItem("2");
-        boxCelda.addItem("3");
-        boxCelda.addItem("4");
-        boxCelda.addItem("5");
-        boxCelda.addItem("6");
-        
-    }
-        
-        
+        if ("N° 1 -- Penados Mayores".equals(opcion)) {
+            boxPabellon.removeAllItems();
+            boxPabellon.addItem("a");
+            boxPabellon.addItem("b");
+            boxPabellon.addItem("c");
+            boxPabellon.addItem("d");
+            boxPabellon.addItem("e");
+            boxPabellon.addItem("f");
+            boxPabellon.addItem("g");
+            boxPabellon.addItem("h");
+            boxPabellon.addItem("i");
+            boxPabellon.addItem("j");
+            boxPabellon.addItem("n");
+            boxCelda.removeAllItems();
+            boxCelda.addItem("1");
+            boxCelda.addItem("2");
+            boxCelda.addItem("3");
+            boxCelda.addItem("4");
+            boxCelda.addItem("5");
+            boxCelda.addItem("6");
+            boxCelda.addItem("7");
+            boxCelda.addItem("8");
+            boxCelda.addItem("9");
+            boxCelda.addItem("10");
+            boxCelda.addItem("11");
+            boxCelda.addItem("12");
+        }
+
+        if ("N° 2 -- Procesados Mayores".equals(opcion)) {
+            boxPabellon.removeAllItems();
+            boxPabellon.addItem("a");
+            boxPabellon.addItem("b");
+            boxPabellon.addItem("c");
+            boxPabellon.addItem("d");
+            boxPabellon.addItem("e");
+            boxPabellon.addItem("f");
+            boxPabellon.addItem("g");
+            boxPabellon.addItem("h");
+            boxPabellon.addItem("i");
+            boxPabellon.addItem("j");
+            boxPabellon.addItem("k");
+            boxCelda.removeAllItems();
+            boxCelda.addItem("1");
+            boxCelda.addItem("2");
+            boxCelda.addItem("3");
+            boxCelda.addItem("4");
+            boxCelda.addItem("5");
+            boxCelda.addItem("6");
+            boxCelda.addItem("7");
+            boxCelda.addItem("8");
+            boxCelda.addItem("9");
+            boxCelda.addItem("10");
+            boxCelda.addItem("11");
+            boxCelda.addItem("12");
+
+        }
+
+        if ("N° 3 -- Jóvenes Adultos".equals(opcion)) {
+            boxPabellon.removeAllItems();
+            boxPabellon.addItem("a");
+            boxPabellon.addItem("b");
+            boxPabellon.addItem("c");
+            boxPabellon.addItem("d");
+            boxPabellon.addItem("refugiados");
+            boxCelda.removeAllItems();
+            boxCelda.addItem("1");
+            boxCelda.addItem("2");
+            boxCelda.addItem("3");
+            boxCelda.addItem("4");
+            boxCelda.addItem("5");
+            boxCelda.addItem("6");
+            boxCelda.addItem("7");
+            boxCelda.addItem("8");
+            boxCelda.addItem("9");
+            boxCelda.addItem("10");
+            boxCelda.addItem("11");
+            boxCelda.addItem("12");
+
+        }
+        if ("N° 4 -- Mujeres".equals(opcion)) {
+            boxPabellon.removeAllItems();
+            boxPabellon.addItem("Procesadas");
+            boxPabellon.addItem("Penadas");
+            boxPabellon.addItem("Aislamiento");
+            boxPabellon.addItem("Madres");
+            boxCelda.removeAllItems();
+            boxCelda.addItem("1");
+            boxCelda.addItem("2");
+            boxCelda.addItem("3");
+            boxCelda.addItem("4");
+            boxCelda.addItem("5");
+            boxCelda.addItem("6");
+            boxCelda.addItem("7");
+            boxCelda.addItem("8");
+            boxCelda.addItem("9");
+            boxCelda.addItem("10");
+            boxCelda.addItem("11");
+            boxCelda.addItem("12");
+
+        }
+        if ("N° 5 -- Alternativa".equals(opcion)) {
+            boxPabellon.removeAllItems();
+            boxPabellon.addItem("Policiales");
+            boxPabellon.addItem("Militares");
+            boxPabellon.addItem("Politicos");
+            boxCelda.removeAllItems();
+            boxCelda.addItem("1");
+            boxCelda.addItem("2");
+            boxCelda.addItem("3");
+            boxCelda.addItem("4");
+            boxCelda.addItem("5");
+            boxCelda.addItem("6");
+
+        }
+
+
     }//GEN-LAST:event_boxUnidadActionPerformed
 
     private void modificarAlbergueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarAlbergueActionPerformed
@@ -1254,10 +1305,16 @@ public class FichaInterno extends javax.swing.JPanel {
     }//GEN-LAST:event_modificarAlbergueActionPerformed
 
     private void modificarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarDatosActionPerformed
-        jTextEditable(true);   
-        modificarDatos.setVisible(false); 
+        jTextEditable(true);
+        modificarDatos.setVisible(false);
         nuevoIngreso.setVisible(false);
         Guardar1.setVisible(false);
+        SoloLetras(apellido);
+        SoloLetras(apodo);
+        SoloLetras(nacionalidad);
+        SoloLetras(madre);
+        SoloLetras(padre);
+        SoloLetras(nombre);
     }//GEN-LAST:event_modificarDatosActionPerformed
 
     private void Cancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cancelar2ActionPerformed
@@ -1266,22 +1323,26 @@ public class FichaInterno extends javax.swing.JPanel {
 
     private void nuevoIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoIngresoActionPerformed
         panel_FichaInterno.setSelectedIndex(1);
-        
+
     }//GEN-LAST:event_nuevoIngresoActionPerformed
 
     private void Actualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Actualizar1ActionPerformed
-       Interno updateInterno = new Interno();
-        
+        Interno updateInterno = new Interno();
+
         updateInterno.setApellido(apellido.getText());
         updateInterno.setNombre(nombre.getText());
         updateInterno.setDni(Integer.parseInt(dni.getText()));
         updateInterno.setEstado_civil((String) estado_civil.getSelectedItem());
-        updateInterno.setNacionalidad(nacionalidad.getText());        
-        updateInterno.setApodo(apodo.getText());    
-        if(sexo.getSelectedItem() == "Masculino") updateInterno.setSexo(false);
-        if(sexo.getSelectedItem() == "Femenino") updateInterno.setSexo(true);
-        updateInterno.setPadre(padre.getText());   
-        updateInterno.setMadre(madre.getText());  
+        updateInterno.setNacionalidad(nacionalidad.getText());
+        updateInterno.setApodo(apodo.getText());
+        if (sexo.getSelectedItem() == "Masculino") {
+            updateInterno.setSexo(false);
+        }
+        if (sexo.getSelectedItem() == "Femenino") {
+            updateInterno.setSexo(true);
+        }
+        updateInterno.setPadre(padre.getText());
+        updateInterno.setMadre(madre.getText());
         updateInterno.setPadre_vive(padre_vive.isSelected());
         updateInterno.setMadre_vive(madre_vive.isSelected());
         updateInterno.setFecha_nac(fec_nac.getText());
@@ -1294,58 +1355,56 @@ public class FichaInterno extends javax.swing.JPanel {
         updateInterno.setOcupacion(ocupacion.getText());
         updateInterno.setLee(lee.isSelected());
         updateInterno.setEscribe(escribe.isSelected());
-        updateInterno.setRasgos(rasgos.getText());   
-        
+        updateInterno.setRasgos(rasgos.getText());
+
         Boolean b = Management.modificarInterno(updateInterno);
-        if(b){
+        if (b) {
             System.out.println("Modificacion Exitosa!");
             jTextEditable(false);
-            JOptionPane.showMessageDialog(rootPane,"Actualizado correctamente!");
+            JOptionPane.showMessageDialog(rootPane, "Actualizado correctamente!");
         }
-        
-               
+
+
     }//GEN-LAST:event_Actualizar1ActionPerformed
 
     private void cargarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarFotoActionPerformed
         lblfoto.setIcon(null);
-        JFileChooser j=new JFileChooser();
+        JFileChooser j = new JFileChooser();
         j.setFileSelectionMode(JFileChooser.FILES_ONLY);//solo archivos y no carpetas
-        int estado=j.showOpenDialog(null);
-        if(estado== JFileChooser.APPROVE_OPTION){
-            try{
-                fis=new FileInputStream(j.getSelectedFile());
+        int estado = j.showOpenDialog(null);
+        if (estado == JFileChooser.APPROVE_OPTION) {
+            try {
+                fis = new FileInputStream(j.getSelectedFile());
                 //necesitamos saber la cantidad de bytes
-                this.longitudBytes=(int)j.getSelectedFile().length();
+                this.longitudBytes = (int) j.getSelectedFile().length();
                 try {
-                    Image icono=ImageIO.read(j.getSelectedFile()).getScaledInstance
-                            (lblfoto.getWidth(),lblfoto.getHeight(),Image.SCALE_DEFAULT);
+                    Image icono = ImageIO.read(j.getSelectedFile()).getScaledInstance(lblfoto.getWidth(), lblfoto.getHeight(), Image.SCALE_DEFAULT);
                     lblfoto.setIcon(new ImageIcon(icono));
                     lblfoto.updateUI();
 
                 } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(rootPane, "imagen: "+ex);
+                    JOptionPane.showMessageDialog(rootPane, "imagen: " + ex);
                 }
-            }catch(FileNotFoundException ex){
+            } catch (FileNotFoundException ex) {
                 ex.printStackTrace();
             }
-            try{
-            String sql="update \"Interno\" set foto1= ? "
-                    + "where dni="+Integer.parseInt(dni.getText())+" and nacionalidad='"+nacionalidad.getText()+"'";
+            try {
+                String sql = "update \"Interno\" set foto1= ? "
+                        + "where dni=" + Integer.parseInt(dni.getText()) + " and nacionalidad='" + nacionalidad.getText() + "'";
 
-            Boolean b = Management.agregarFoto(sql,fis,longitudBytes);
-            if(b==true){
-                System.out.println("\nAlta exitosa");
-                cargarFoto.setEnabled(false);
-                JOptionPane.showMessageDialog(rootPane,"Guardado correctamente");
-                
-            }            
-            
-            
-        }catch(NumberFormatException | HeadlessException x){
-            JOptionPane.showMessageDialog(rootPane, "exception 2 "+x);
-        }           // TODO add your handling code here:
+                Boolean b = Management.agregarFoto(sql, fis, longitudBytes);
+                if (b == true) {
+                    System.out.println("\nAlta exitosa");
+                    cargarFoto.setEnabled(false);
+                    JOptionPane.showMessageDialog(rootPane, "Guardado correctamente");
+
+                }
+
+            } catch (NumberFormatException | HeadlessException x) {
+                JOptionPane.showMessageDialog(rootPane, "exception 2 " + x);
+            }           // TODO add your handling code here:
         }        // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_cargarFotoActionPerformed
 
     private void estado_civilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estado_civilActionPerformed
@@ -1366,46 +1425,46 @@ public class FichaInterno extends javax.swing.JPanel {
 
     private void guardarCambios1raVezActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCambios1raVezActionPerformed
         String nuevaUnidad, nuevoPabellon, nuevaCelda, sql;
-        nuevaUnidad=(String) boxUnidad.getSelectedItem();
+        nuevaUnidad = (String) boxUnidad.getSelectedItem();
         nuevoPabellon = (String) boxPabellon.getSelectedItem();
-        nuevaCelda=(String) boxCelda.getSelectedItem();
+        nuevaCelda = (String) boxCelda.getSelectedItem();
         ResultSet val;
-        
-        try{
-             val = Management.consultarInternoDNI(Integer.parseInt(dni.getText()));
-             while(val.next()){ 
-                nroInterno=(val.getString(1));
+
+        try {
+            val = Management.consultarInternoDNI(Integer.parseInt(dni.getText()));
+            while (val.next()) {
+                nroInterno = (val.getString(1));
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "exception: " + ex);
         }
-        }
-        catch(Exception ex){
-            JOptionPane.showMessageDialog(rootPane,"exception: "+ex);
-        }
-        System.out.println("nro interno: "+nroInterno);
-        
-        
-        try{    
+        System.out.println("nro interno: " + nroInterno);
+
+        try {
             sql = "insert into \"Albergue\" (\"nInterno\", \"unidad\", \"pabellon\", \"celda\") "
-                + "Values ("+nroInterno+", '"+nuevaUnidad+"', '"+nuevoPabellon+"', '"+nuevaCelda+"');";
+                    + "Values (" + nroInterno + ", '" + nuevaUnidad + "', '" + nuevoPabellon + "', '" + nuevaCelda + "');";
             //ResultSet rs = Management.consultarCelda(nroInterno);
             //ResultSet rs = Management.conexion.ejecutarSQLSelect(sql);
             boolean rs = Management.conexion.ejecutarSQL(sql);
-            
-            if (rs==false) avisoAlbergue.setText("Modificacion de celda Exitosa");
-            else if(rs==true) avisoAlbergue.setText("Opps, algo no va bien");
+
+            if (rs == false) {
+                avisoAlbergue.setText("Modificacion de celda Exitosa");
+            } else if (rs == true) {
+                avisoAlbergue.setText("Opps, algo no va bien");
+            }
             /*while(rs1.next()){ 
                 labelUnidad.setText(rs1.getString(2));       //unidad
                 labelPabellon.setText(rs1.getString(3));     //pabellon
                 labelCelda.setText(rs1.getString(4));        //celda
             }*/
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(rootPane,"exception: "+ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "exception: " + ex);
         }
     }//GEN-LAST:event_guardarCambios1raVezActionPerformed
 
     private void Guardar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Guardar2ActionPerformed
         Registro nuevo = new Registro();
 
-        
         /*nuevo.setCausa((String)autocaratulados.getText());
         nuevo.setFecha_ingreso(fechadeIngreso.getText());
         nuevo.setFecha_egreso(fechadeEgreso.getText());
@@ -1427,7 +1486,6 @@ public class FichaInterno extends javax.swing.JPanel {
         nuevo.setTel1(tel1.getText());
         nuevo.setTel2(tel2.getText());
         nuevo.setRasgos(rasgos.getText());*/
-        
         //Boolean b = Management.altaInterno(nuevo);
     }//GEN-LAST:event_Guardar2ActionPerformed
 

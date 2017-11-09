@@ -23,6 +23,19 @@ public class ConsultarInterno extends javax.swing.JPanel {
     
     public ConsultarInterno() {
         initComponents();
+        SoloNumeros(buscarDNI);
+    }
+    
+    public void SoloNumeros(javax.swing.JTextField a){
+        a.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e){
+                char c=e.getKeyChar();
+                if(!Character.isDigit(c)){
+                    getToolkit().beep();
+                    e.consume();
+                }
+            }
+        });
     }
 
     /**
