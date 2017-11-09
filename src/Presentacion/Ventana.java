@@ -6,6 +6,7 @@
 package Presentacion;
 
 import Datos.Conexion;
+import Logica.Hora;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
@@ -31,6 +32,8 @@ public class Ventana extends javax.swing.JFrame {
         } 
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         initComponents();
+        Hora hilo = new Hora(jLabel2);
+        hilo.start();
 
         //pd = new PanelDerecho();
         //jPanel5.add(pd);             
@@ -104,6 +107,7 @@ public class Ventana extends javax.swing.JFrame {
 
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Estado");
         jPanel3.add(jLabel2);
 
